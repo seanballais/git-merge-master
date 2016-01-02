@@ -11,12 +11,12 @@ merge() {
 }
 
 check_branch() {
-    if [ `git branch --list $arg1` ]; then
-        echo "Merging $arg1 with master and develop..."
+    if [ `git branch --list $1` ]; then
+        echo "Merging $1 with master and develop..."
 
-        merge $arg1
+        merge $1
     else
-        echo "Branch ($arg1) doesn't exist. Exiting now..."
+        echo "Branch ($1) doesn't exist. Exiting now..."
         exit 1
     fi
 }
