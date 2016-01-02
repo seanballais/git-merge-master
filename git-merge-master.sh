@@ -11,27 +11,27 @@ merge() {
 }
 
 check_branch() {
-    if [`git branch --list $arg1`]; then
+    if [ `git branch --list $arg1` ]; then
         echo "Merging $arg1 with master and develop..."
 
         merge $arg1
     else
-        echo "Branch ($arg1) doesn't exit. Exiting now..."
-        set -e
+        echo "Branch ($arg1) doesn't exist. Exiting now..."
+        exit 1
     fi
 }
 
 # Locate the help argument before continuing
 for arg in "$@"
 do
-    if [$arg -eq "-h" || $arg -eq "--help"]; then
+    if [ $arg = "-h" ] || [ $arg = "--help" ]; then
         echo "Usage: git-merge-master <branch name>..."
-        kill -9 ${ps -A}
+        exit 0
     fi
 done
 
 # Now process the input
-if ["$#" -eq 0]; then
+if [ "$#" -eq 0 ]; then
     read -p "What branch to merge with master and develop? " branch
     check_branch $branch
 else
@@ -41,4 +41,4 @@ else
     done
 fi
 
-kill -9 ${ps -A}
+exit 0
