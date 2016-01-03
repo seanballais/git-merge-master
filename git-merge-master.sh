@@ -35,6 +35,7 @@ if [ "$#" -eq 0 ]; then
     read -p "What branch to merge with master and develop? " branch
     check_branch $branch
 else
+    git checkout master
     for branch in "$@"
     do
         check_branch $branch
